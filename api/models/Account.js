@@ -7,6 +7,11 @@ const accountSchema = mongoose.Schema( {
         required: true,
         trim: true
     },
+    customerId: {
+        type: Object,
+        required: true,
+        trim: true,
+    },
     accountNo: {
         type: Number,
         unique: true,
@@ -26,7 +31,6 @@ const accountSchema = mongoose.Schema( {
 accountSchema.methods.toJSON = function () {
     const account = this
     const accountObject = account.toObject()
-
     return accountObject
 }
 

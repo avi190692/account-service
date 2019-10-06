@@ -8,6 +8,7 @@ const createAccount= async (req, reply) => {
     try{
     const account=new Account({
         name:req.body.name,
+        customerId:req.body.customerId,
         accountNo:req.body.accountNo,
         balanceAmount:req.body.balanceAmount
     })

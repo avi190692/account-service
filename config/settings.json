@@ -10,5 +10,11 @@
         "mongodb" : {
             "url" : "mongodb://localhost:27017/accountdb"
         }
+    },
+    "kafka" : {
+        "server" : "localhost:2181",
+        "topics" : {
+            "credit-debit" : "credit-debit"
+        }
     }
 }

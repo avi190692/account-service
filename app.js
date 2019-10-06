@@ -4,12 +4,12 @@ const loadSettings = require('./config/configurationAdaptor');
 const { mongoConnect  } = require('./api/db/db');
 
 
+
 const appSettingsPath = process.env.SETTINGS;
 console.log("Setting file with name = " + appSettingsPath)
 loadSettings({appSettingsPath}).then(() => {
-    debugger
-    console.log(nconf.get('db.mongodb.url'))
     mongoConnect(nconf.get('db.mongodb.url'));
+  //  listenDebitCreditTransaction();
     const serverOptions = {
         logServerity: nconf.get('logServerity')
     }

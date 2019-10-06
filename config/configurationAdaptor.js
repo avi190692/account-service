@@ -10,6 +10,7 @@ const loadSettings = ({appSettingsPath}) => new Promise((resolve, reject) => {
             file : appSettingsPath,
             logicalSeparator: '.'
         })
+        const { listenDebitCreditTransaction } = require('../api/listeners/creditDebitListener');
         resolve();
     } catch (err) {
         reject(err);
