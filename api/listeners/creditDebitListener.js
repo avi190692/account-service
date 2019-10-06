@@ -33,6 +33,7 @@ listenDebitCreditTransaction.on('error', function(err) {
 
 async function handleMessage(message) {
     try {
+        debugger
         console.log(JSON.parse(message.value).accountUpdate)
         let account = new Account(JSON.parse(message.value).accountUpdate);
         account = await updateAccount(account);
@@ -43,8 +44,15 @@ async function handleMessage(message) {
             "transactionType" : transactionType,
             "transactionStatus" : "PASSED"
         }
+        
         await publishTransactionUpdateMessage(transactionStatusUpdation);
     } catch (err) {
+        const transactionStatusUpdation = { 
+            "trnsactionId" : trnsactionId,  
+            "transactionType" : transactionType,
+            "transactionStatus" : "FAILED"
+        }
+        await publishTransactionUpdateMessage(transactionStatusUpdation);
         console.log(err)
     }  
 }

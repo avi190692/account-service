@@ -9,7 +9,6 @@ const appSettingsPath = process.env.SETTINGS;
 console.log("Setting file with name = " + appSettingsPath)
 loadSettings({appSettingsPath}).then(() => {
     mongoConnect(nconf.get('db.mongodb.url'));
-  //  listenDebitCreditTransaction();
     const serverOptions = {
         logServerity: nconf.get('logServerity')
     }

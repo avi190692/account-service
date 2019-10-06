@@ -22,7 +22,7 @@ const createAccount= async (req, reply) => {
 
 const getAccount=async(req,reply)=>{
     try{
-        const acc=await Account.where('accountNo',req.params.accountNo)
+        const acc = await Account.where('accountNo',req.params.accountNo)
         reply.send(acc)
     }catch(err) {
         console.log(err);
