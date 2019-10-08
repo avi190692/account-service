@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
 
+const AccountType=Object.freeze({
+    CURRENT: 'CURRENT',
+    SAVINGS: 'SAVINGS'
+})
 const accountSchema = mongoose.Schema( {
-    name: {
+    accountType: {
         type: String,
-        required: true,
-        trim: true
+        enum:Object.values(AccountType),
+        unique:false
     },
     customerId: {
-        type: Object,
+        type: Number,
         required: true,
         trim: true,
     },

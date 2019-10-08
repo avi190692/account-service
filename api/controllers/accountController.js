@@ -7,12 +7,12 @@ const stringify = require('json-stringify-safe')
 const createAccount= async (req, reply) => {
     try{
     const account=new Account({
-        name:req.body.name,
+        accountType:req.body.accountType,
         customerId:req.body.customerId,
         accountNo:req.body.accountNo,
         balanceAmount:req.body.balanceAmount
     })
-    account.save();
+    await account.save();
     reply.send('Account created successfully')
 }catch(err) {
     console.log(err);
@@ -22,7 +22,9 @@ const createAccount= async (req, reply) => {
 
 const getAccount=async(req,reply)=>{
     try{
-        const acc = await Account.where('accountNo',req.params.accountNo)
+        const acc = await Account.where('customerId',req.params.customerId)
+        console.log(req.params.customerId)
+        console.log(acc)
         reply.send(acc)
     }catch(err) {
         console.log(err);
@@ -30,16 +32,24 @@ const getAccount=async(req,reply)=>{
     }
 }
 
+const getBalance=async (req,reply)=>{
+    try{
+        const acc=await Account.where('accountNo',req.params.accountNo)
+        console.log(acc)
+        reply.send(acc[0].balanceAmount)
+    }catch(err){
+        console.log(err)
+        throw err
+    }
+}
+
 const updateAccount=async(req,reply)=>{
     try{
-        // const data={
-        //     name:req.body.name,
-        //     accountNo:req.body.accountNo,
-        //     balanceAmount:req.body.balanceAmount
-        // }
+
         let acc=await Account.where('accountNo',req.params.accountNo)
    
-        acc[0].name=req.body.name
+        acc[0].accountType=req.body.accountType
+        acc[0].customerId=req.body.customerId
         acc[0].accountNo=req.body.accountNo
         acc[0].balanceAmount=req.body.balanceAmount
         acc[0].save();
@@ -66,6 +76,7 @@ const deleteAccount=async(req,reply)=>{
 module.exports= {
     createAccount,
     getAccount,
+    getBalance,
     updateAccount,
     deleteAccount
 }
