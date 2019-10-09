@@ -22,10 +22,12 @@ const createAccount= async (req, reply) => {
 
 const getAccount=async(req,reply)=>{
     try{
-        const acc = await Account.where('customerId',req.params.customerId)
-        console.log(req.params.customerId)
-        console.log(acc)
-        reply.send(acc)
+        const acc = await Account.where('accountNo',req.params.accountNo)
+        if(acc[0]===undefined){
+            reply.send('Account does not exist')
+        }else{
+            reply.send(acc)
+        }
     }catch(err) {
         console.log(err);
         throw err;
@@ -35,8 +37,12 @@ const getAccount=async(req,reply)=>{
 const getBalance=async (req,reply)=>{
     try{
         const acc=await Account.where('accountNo',req.params.accountNo)
-        console.log(acc)
-        reply.send(acc[0].balanceAmount)
+        if(acc[0]===undefined){
+            reply.send('Account does not exist')
+        }else{
+            reply.send(acc[0].balanceAmount)
+        }
+        
     }catch(err){
         console.log(err)
         throw err

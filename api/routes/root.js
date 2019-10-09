@@ -8,7 +8,7 @@ const {
 const { validatePostSignup } = require('../validations/auth');
 
 module.exports = async (fastify) => {
-    fastify.get('/account/:customerId',getAccount)
+    fastify.get('/account/:accountNo',getAccount)
     fastify.get('/account/bal/:accountNo',getBalance)
     fastify.post('/account', createAccount);
     fastify.put('/account/:accountNo',updateAccount)
